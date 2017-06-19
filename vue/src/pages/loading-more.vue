@@ -1,13 +1,13 @@
 <template>
   <div  ref="wrapper" :style="{ height: wrapperHeight + 'px' }" class="text-center">
-    <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="5">
+    <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading">
       <div class="card-box" v-for="(item, index) in ecardList" >
        {{item.id}}
       </div>
     </div>
     <p v-show="loading || loadingText == '已加载全部'" class="page-infinite-loading" style="height: 1rem;color: #808080;">
-          {{loadingText}}
-      </p>
+      {{loadingText}}
+    </p>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -21,7 +21,6 @@ import Vue from 'vue'
 import { InfiniteScroll  } from 'mint-ui';
 Vue.use(InfiniteScroll);
 export default {
-  name: 'hello',
   data () {
     return {
       ecardList: [],
