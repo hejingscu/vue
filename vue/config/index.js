@@ -6,9 +6,9 @@ module.exports = {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
-    productionSourceMap: true,
+    assetsSubDirectory: './static',
+    assetsPublicPath: 'http://10.200.4.140/pocket_h5/pocketWallet_h5/dist/',
+    productionSourceMap: false,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
@@ -25,9 +25,31 @@ module.exports = {
     env: require('./dev.env'),
     port: 8071,
     autoOpenBrowser: true,
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: './static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+        '/account':{
+            target: 'http://172.30.248.170/',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/account':'/account'
+            }
+        },
+        '/api/v2/fundsloan':{
+            target: 'http://172.30.251.46:8080/',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/api/v2/fundsloan':'/fundsloan'
+            }
+        },
+        '/api/v1/funds':{
+            target: 'http://172.30.248.170/',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/api/v1/funds':'/funds'
+            }
+        }
+    },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
