@@ -48,7 +48,6 @@ export default {
     }
   },
   methods: {
-    //弹出冻结的e卡订单列表
     popup(){
         this.showFreezeItem = !this.showFreezeItem
     },
