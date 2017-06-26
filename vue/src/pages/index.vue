@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="page">
     <div class="sidebar">
       <a href="#/vueTheMask">vueTheMask</a>
       <a href="#/loadingMore">LoadingMore</a>

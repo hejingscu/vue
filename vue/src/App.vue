@@ -26,6 +26,7 @@ body {
   width: 100%;
   height: 100%;
   font-family: "Microsoft YaHei",Helvetica,STHeiti,Droid Sans Fallback;
+  min-height: 100vh;
 }
 table{
   border: none;
@@ -96,10 +97,14 @@ p,div,ul,li{
 .w92{width: 92%;margin: 0 4%;}
 .w100{width: 100%;}
 
-
+.h50{min-height: 50vh;height: 50vh;}
+.h100{min-height: 100vh;}
 
 .page{
-  margin: 0 auto;
+  margin: 0;
+  font-size: .24rem;
+  text-align: center;
+  overflow: hidden;
 }
 
 //按钮

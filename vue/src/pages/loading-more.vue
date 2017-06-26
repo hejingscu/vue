@@ -1,5 +1,5 @@
 <template>
-  <div  ref="wrapper" :style="{ height: wrapperHeight + 'px' }" class="text-center">
+  <div  ref="wrapper" :style="{ height: wrapperHeight + 'px' }" class="page">
     <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading">
       <div class="card-box" v-for="(item, index) in ecardList" >
        {{item.id}}

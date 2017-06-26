@@ -42,11 +42,11 @@ module.exports = {
                 '^/api/v2/fundsloan':'/fundsloan'
             }
         },
-        '/api/v1/funds':{
+        '/api/v1/open-admin':{
             target: 'http://172.30.248.170/',
             changeOrigin: true,
             pathRewrite: {
-                '^/api/v1/funds':'/funds'
+                '^/api/v1/open-admin':'/open-admin'
             }
         }
     },

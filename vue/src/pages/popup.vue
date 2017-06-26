@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="page">
     <a href="javascript:;" @click="popup()">底部弹出</a><br>
     <a href="javascript:;" @click="popup1()">中部弹出</a>
 
