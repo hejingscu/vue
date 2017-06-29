@@ -1,12 +1,83 @@
 <template>
   <div id="app">
+    <h3 style="position: fixed;bottom: 0;z-index: 1001;font-size: .26rem;">
+      <span v-if="parentPath == ''">我没有父级路由</span>
+      <span v-else>我的父级路由是<span style="color: red">{{parentPath}}</span></span>
+    </h3>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import router from './router'
+import axios from 'axios'
 export default {
-  name: 'app'
+  name: 'app',
+  data(){
+    return {
+      parentPath: '',
+      ajaxRequestNum: 0
+    }
+  },
+  methods: {
+    //此路由是否有父级路由
+    checkParentNode(){
+      let curPath = this.$route.path, familyList = this.$route.matched, parentPath = ''
+      familyList.forEach( (item, index) => {
+        if(item.path == curPath && index > 0){
+          parentPath = familyList[index-1].path
+        }
+      })
+      this.parentPath = parentPath
+    }
+  },
+  created: function(){
+    let that = this
+    that.checkParentNode()
+    router.beforeEach((to, from, next) => {
+      if(to.path !== from.name){that.name = to.name}
+      next()
+      that.checkParentNode()
+    })
+
+    //添加一个请求拦截器
+    axios.interceptors.request.use(function(config){
+      //在请求发出之前进行一些操作
+      that.ajaxRequestNum++
+      return config;
+    },function(error){
+      //Do something with request error
+      return Promise.reject(error);
+    });
+    //添加一个响应拦截器
+    axios.interceptors.response.use(function(res){
+      //在这里对返回的数据进行处理
+      that.ajaxRequestNum--
+      return res;
+    },function(error){
+      //Do something with response error
+      that.ajaxRequestNum--
+      if (error.response) {
+        switch (error.response.status) {
+          case 401:  //401  
+            that.$Notice.error({title: '未登录'});
+            break;
+          case 404: 
+            that.$Notice.error({title: '接口地址找不到了，若无影响，请忽略'});
+            break;
+          case 502: 
+            that.$Notice.error({title: '服务器正在重启'});
+            break;
+          case 504: 
+            that.$Notice.error({title: '服务器设置了断点'});
+            break;
+          default: 
+            that.$Notice.error({title: error.response.data.error.description});
+        }
+      }
+      return Promise.reject(error);
+    })
+  }
 }
 </script>
 
@@ -104,9 +175,17 @@ p,div,ul,li{
   margin: 0;
   font-size: .24rem;
   text-align: center;
-  overflow: hidden;
 }
-
+//子页面，通过z-index将母页面遮挡住
+.child-page{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 202;
+  background: #f4f4f4;
+}
 //按钮
 .btn-group{
     margin: 0 2% .3rem 2%;
@@ -152,5 +231,15 @@ p,div,ul,li{
   width: 100%;
   position: fixed;
   bottom: 0;
+}
+.btn-link{
+  display: block;
+  width: 92%;
+  margin: 0 auto;
+  height: .8rem;
+  line-height: .8rem;
+  border: 1px solid #42b983;
+  color: #42b983;
+  margin-bottom: .3rem;
 }
 </style>

@@ -1,8 +1,10 @@
 <template>
   <div class="page">
     <div class="sidebar">
-      <a href="#/vueTheMask">vueTheMask</a>
-      <a href="#/loadingMore">LoadingMore</a>
+      <a class="btn-link" href="#/vueTheMask">vueTheMask</a>
+      <a class="btn-link" href="#/loadingMore">LoadingMore</a>
+      <a class="btn-link" href="#/async">async</a>
+      <a class="btn-link" href="#/info">子页demo</a>
     </div>
   </div>
 </template>
@@ -18,8 +20,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-a {
-  color: #42b983;
+<style lang="scss" scoped>
+.sidebar{
+  margin-top: .2rem;
 }
+
 </style>

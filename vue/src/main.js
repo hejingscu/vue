@@ -5,7 +5,14 @@ import App from './App'
 import router from './router'
 import components from './components/' //加载公共组件
 import VueTheMask from 'vue-the-mask'
+import filter from './utils/filter'
+import core from './utils/core'
+import iView from 'iview';
+
+import 'iview/dist/styles/iview.css';
+
 Vue.use(VueTheMask)
+Vue.use(iView);
 
 Vue.config.productionTip = false
 

@@ -1,26 +1,25 @@
 <template>
   <div class="page">
     <div class="sidebar">
-     
+     {{appList}}
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { appList } from '../service/getData'
 export default {
   data () {
     return {
-     
+     appList: {}
     }
   },
   methods:{
-    getList(){
-      var getList = async function(){
-        const result = await axios.get('/api/v1/open-admin/app/list', {pageIndex: 1, pageSize: 10})
-        console.log(result)
-      }
-      getList()
+    async getList(){
+      let that = this
+      const result = await appList({pageIndex: 1, pageSize: 10})
+      that.appList = result.data
     }
   },
   created: function(){

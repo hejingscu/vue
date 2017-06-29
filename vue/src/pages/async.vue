@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="sidebar">
-     
+     {{res}}
     </div>
   </div>
 </template>
@@ -28,12 +28,12 @@ export default {
       this.showResult(result)
     },
     showResult(result){
-      console.log(result)
+      this.res = result
     }
   },
   created: function(){
-    this.getList()
-    //this.asyncGetList()
+    //this.getList()
+    this.asyncGetList()
   }
 }
 </script>

@@ -10,6 +10,11 @@ import PageDialogList from '@/pages/dialogList.vue'
 import PageAnimation from '@/pages/animation.vue'
 import Axios from '@/pages/axios.vue'
 import PageAsync from '@/pages/async.vue'
+import Ecma from '@/pages/es6.vue'
+
+import InfoList from '@/pages/info/list.vue'
+import InfoAdd from '@/pages/info/add.vue'
+import InfoEdit from '@/pages/info/edit.vue'
 
 Vue.use(Router)
 
@@ -23,6 +28,13 @@ export default new Router({
     {path: '/dialogList',component: PageDialogList},
     {path: '/animation',component: PageAnimation},
     {path: '/axios',component: Axios},
-    {path: '/async',component: PageAsync}
+    {path: '/async',component: PageAsync},
+    {path: '/es6',component: Ecma},
+    {path: '/info',component: InfoList,
+        children: [
+            {path: '/info/add',component: InfoAdd},
+            {path: '/info/edit',component: InfoEdit}
+        ]
+    }
   ]
 })
