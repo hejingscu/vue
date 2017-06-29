@@ -1,29 +1,42 @@
 <template>
   <div class="page">
     <div class="sidebar">
-     {{appList}}
+     {{appList.infos}} <br>
+     {{appList2.infos}}
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import { appList } from '../service/getData'
+import { appList,serviceList } from '../service/getData'
 export default {
   data () {
     return {
-     appList: {}
+     appList: {},
+     serviceList: {},
+     appList2: {}
     }
   },
   methods:{
     async getList(){
       let that = this
-      const result = await appList({pageIndex: 1, pageSize: 10})
-      that.appList = result.data
+      //使用场景，从多个接口都拿到参数后做一些事情
+      that.appList = await appList({pageIndex: 1, pageSize: 10})
+      // that.serviceList = await serviceList()
+      //do sometings after get data
+      //such as that.appList.splice(n,1)
+    },
+    getInfo(){
+      let that = this
+      //使用场景，仅仅从一个接口拿东西，之后做一些事情
+      appList({pageIndex: 1, pageSize: 10}).then( res => {
+        that.appList2 = res
+      })
     }
   },
   created: function(){
-    this.getList()
+    this.getInfo()
   }
 }
 </script>

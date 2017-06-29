@@ -20,7 +20,7 @@ export default {
       axios.get('/api/v1/open-admin/app/list', {pageIndex: 1, pageSize: 10}).then(res => {
         this.res = res
       })
-      this.showResult(this.res)
+      this.showResult(this.res)//无法取到值
     },
     //异步
     async asyncGetList(){
